@@ -1,5 +1,5 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppsComponent } from './apps/apps.component';
@@ -18,4 +18,16 @@ const routes: Routes = [
   }
 ];
 
-export const UserRouter: ModuleWithProviders = RouterModule.forChild(routes);
+// export const UserRouter: ModuleWithProviders = RouterModule.forChild(routes);
+
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes)
+    ],
+    exports: [
+        RouterModule
+    ],
+    providers: []
+})
+export class UserRouter {}

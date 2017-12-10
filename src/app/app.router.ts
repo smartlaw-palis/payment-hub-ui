@@ -1,5 +1,5 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
 import { OnlyAdminUsersGuard } from './guards/only-admin-users.guard';
 import { HomeComponent } from './home/home.component'
@@ -23,4 +23,17 @@ const routes: Routes = [
   { path: '**', redirectTo: '' }
 ];
 
-export const AppRouter: ModuleWithProviders = RouterModule.forRoot(routes);
+//export const AppRouter: ModuleWithProviders = RouterModule.forRoot(routes);
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(routes, {
+            preloadingStrategy: PreloadAllModules
+        })
+    ],
+    exports: [
+        RouterModule
+    ],
+    providers: []
+})
+export class AppRouter {}

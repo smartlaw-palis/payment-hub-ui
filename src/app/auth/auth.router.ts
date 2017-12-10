@@ -1,5 +1,5 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -16,4 +16,16 @@ const routes: Routes = [
   }
 ];
 
-export const AuthRouter: ModuleWithProviders = RouterModule.forChild(routes);
+// export const AuthRouter: ModuleWithProviders = RouterModule.forChild(routes);
+
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes)
+    ],
+    exports: [
+        RouterModule
+    ],
+    providers: []
+})
+export class AuthRouter {}

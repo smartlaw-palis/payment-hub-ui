@@ -1,5 +1,5 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,4 +20,15 @@ const routes: Routes = [
   }
 ];
 
-export const AdminRouter: ModuleWithProviders = RouterModule.forChild(routes);
+// export const AdminRouter: ModuleWithProviders = RouterModule.forChild(routes);
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes)
+    ],
+    exports: [
+        RouterModule
+    ],
+    providers: []
+})
+export class AdminRouter {}
