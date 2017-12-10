@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12 data-list">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Key</th>
+          <th scope="col">BTC xPubKey</th>
+          <th scope="col">ETH xPubKey</th>
+          <th scope="col">Status</th>
+          <th scope="col">Owner</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="isLoading">
+        <tr>
+          <td colspan="7" class="text-center">
+            <i class="fa fa-spinner fa-spin"></i>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isLoading && apps.data.length == 0">
+        <tr>
+          <td colspan="7" class="text-center">
+            No data found.
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isLoading && apps.data.length > 0">
+        <tr *ngFor="let app of apps.data">
+          <th scope="row">
+            <a [routerLink]="['/user/app-payments', app.id]">{{app.name}}</a>
+          </th>
+          <td>{{shorten(app.key)}} <button ngxClipboard [cbContent]="app.key" (cbOnSuccess)="copied()" class="btn btn-sm btn-link pointer"><i class="fa fa-clipboard"></i></button></td>
+          <td>{{shorten(app.btc_xpubkey)}} <button ngxClipboard [cbContent]="app.btc_xpubkey" (cbOnSuccess)="copied()" class="btn btn-sm btn-link pointer"><i class="fa fa-clipboard"></i></button></td>
+          <td>{{shorten(app.eth_xpubkey)}} <button ngxClipboard [cbContent]="app.eth_xpubkey" (cbOnSuccess)="copied()" class="btn btn-sm btn-link pointer"><i class="fa fa-clipboard"></i></button></td>
+          <td>
+            <span *ngIf="app.is_active" class="badge badge-success">Active</span>
+            <span *ngIf="!app.is_active" class="badge badge-danger">In-Active</span>
+          </td>
+          <td>
+            {{app.User.first_name}} {{app.User.last_name}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div *ngIf="apps.data.length > 0">
+      <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pagination.perPage" [collectionSize]="apps.total" [(page)]="pagination.page" [maxSize]="5"></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<ng-template #createUserModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">New User</h4>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>First Name</label>
+        <input [(ngModel)]="user.first_name" type="text" name="user-first-name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input [(ngModel)]="user.last_name" type="text" name="user-last-name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input [(ngModel)]="user.email" type="email" name="user-email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input [(ngModel)]="user.password" type="password" name="user-password" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input [(ngModel)]="user.confirm_password" type="password" name="user-confirm-password" class="form-control">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" [disabled]="createSubmitBtn.isLoading" (click)="createApp()">{{createSubmitBtn.caption}}</button>
+    <button type="button" class="btn btn-danger" [disabled]="createSubmitBtn.isLoading" (click)="c('Cancel click')">Cancel</button>
+  </div>
+</ng-template>
+
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-success pull-right" type="button" (click)="showCreateForm(createUserModal)">
+      <i class="fa fa-plus"></i> Create New
+    </button>
+  </div>
+  <div class="col-md-12 data-list">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="isLoading">
+        <tr>
+          <td colspan="3" class="text-center">
+            <i class="fa fa-spinner fa-spin"></i>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isLoading && users.data.length == 0">
+        <tr>
+          <td colspan="3" class="text-center">
+            No data found.
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="!isLoading && users.data.length > 0">
+        <tr *ngFor="let user of users.data">
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <a [routerLink]="['/admin/user/apps', user.id]">View Apps</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div *ngIf="users.data.length > 0">
+      <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="pagination.perPage" [collectionSize]="users.total" [(page)]="pagination.page" [maxSize]="5"></ngb-pagination>
+    </div>
+  </div>
+</div>

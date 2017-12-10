@@ -1,0 +1,43 @@
+<div class="row m-0">
+  <div class="col-lg-3 col-md-2 d-none d-md-block"></div>
+  <div class="col-sm-12 col-lg-6 col-md-8 text-center">
+    <h2><span class="text-green">Sign</span> In</h2>
+  </div>
+  <div class="col-lg-3 col-md-2 d-none d-md-block"></div>
+</div>
+
+<div class="row m-0">
+  <div class="col-lg-3 col-md-2 d-none d-md-block"></div>
+  <div class="col-sm-12 col-lg-6 col-md-8">
+    <form (ngSubmit)="login()">
+      <ngb-alert *ngIf="alert.type" [type]="alert.type" (close)="closeAlert()">
+        {{ alert.message }}
+      </ngb-alert>
+
+      <div class="form-group">
+        <input class="form-control" name="email" [(ngModel)]="user.email" type="email" placeholder="Email">
+        <p *ngIf="errors && errors.email" class="form-text text-danger">{{errors.email[0]}}</p>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="password" [(ngModel)]="user.password" type="password" placeholder="Password">
+        <p *ngIf="errors && errors.password" class="form-text text-danger">{{errors.password[0]}}</p>
+      </div>
+
+      <input type="submit" class="hide" (click)="login()">
+
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <!-- <button (click)="showResetForm(resetModal)" type="button" class="forgot-password btn btn-link">Forgot Password?</button> -->
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <button class="btn btn-primary pull-right" type="button" (click)="login()">
+            {{submitBtn.caption}}
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-lg-3 col-md-2 d-none d-md-block"></div>
+</div>
