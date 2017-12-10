@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   public txid: any = '';
   public result : any = {};
   public status : any = [];
-  public appKey : any = 'Dz91ZhDOchhbrlvwasxTcQUcXFA663omCnHOVkP9kbJfCrV4CWiYnZkC1JcSXefz';
+  public appKey : any = '';
   public app : any;
   public submitBtn : any;
 
