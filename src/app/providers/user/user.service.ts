@@ -70,4 +70,18 @@ export class UserService {
     return this.doGetData(`${this.apiURL}/app/${appId}/payments/${perPage}/${page}`);
   }
 
+  appPaymentData(appKey) {
+    return new Promise((resolve, reject) => {
+        this.http.get(`${this.apiURL}/payment/data`, { headers: this.utils.createPaymentHeaders(appKey) })
+          .map(res => res.json())
+          .subscribe(data => {
+            resolve(data);
+          },
+          error => {
+            reject(error.json());
+          }
+          );
+      })
+  }
+
 }

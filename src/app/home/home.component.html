@@ -21,16 +21,6 @@
             </div>
 
             <div class="form-group">
-              <label>Amount (USD)</label>
-              <input type="number" class="form-control" name="payment-amount" [(ngModel)]="app.amount">
-            </div>
-
-            <div class="form-group">
-              <label>Payment Note</label>
-              <input type="text" class="form-control" name="payment-note" [(ngModel)]="app.note">
-            </div>
-
-            <div class="form-group">
               <button class="btn btn-primary" (click)="submitPaymentRequest()">Submit</button>
             </div>
 
@@ -40,12 +30,25 @@
     </div>
 
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Transaction Result</h4>
-          <p class="pre">
-            {{result | json}}
-          </p>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Transaction Result</h4>
+            <p class="pre">
+              {{result | json}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Payment Status(Websocket)</h4>
+            <p class="pre">
+              {{status | json}}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -53,10 +56,30 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Payment Status(Websocket)</h4>
-          <p class="pre">
-            {{status | json}}
-          </p>
+          <h4 class="card-title">App Payment Data</h4>
+          <form>
+            <div class="form-group">
+              <label>APP Key</label>
+              <input type="text" class="form-control" [(ngModel)]="trackAppKey" name="track-app-key">
+            </div>
+
+            <div class="form-group" *ngIf="trackData">
+              <label>Token Price: {{trackData.token.price}} <span class="uppercase">{{trackData.token.unit}}</span></label>
+            </div>
+
+            <div class="form-group" *ngIf="trackData">
+              <label>ETH Rate: {{trackData.rates.eth}} USD</label>
+            </div>
+
+            <div class="form-group" *ngIf="trackData">
+              <label>BTC Rate: {{trackData.rates.btc}} USD</label>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary" (click)="paymentData()">GET</button>
+            </div>
+
+          </form>
         </div>
       </div>
     </div>

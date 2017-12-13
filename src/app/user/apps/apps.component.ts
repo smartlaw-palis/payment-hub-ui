@@ -52,6 +52,8 @@ export class AppsComponent implements OnInit {
   private resetNewApp() {
     this.newApp = {
       name: '',
+      token_price: 0,
+      unit_price: 'usd',
       btc_xpubkey: 'tpubD6NzVbkrYhZ4YahP3U1iX4VwM6WH2gkY7a2Q5j33ET4rsSsbUZaJrhvm3Pg1EsSXSBUEG3YXZqGDxdQdJkZdDw6nynAGHs8Cfuh42EoYahd',
       eth_xpubkey: 'xpub6F3UDWWniqSUcfPied5SPqhBTFuYwAS2dGPQo1Sjpen4tDN1p4cdwGQAEQRjjvpZViBs8Du6uW2YXgirbGxo8avtX54WLWwFRZnAqAj9WyH'
     };

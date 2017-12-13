@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestService } from '../providers/test.service';
+import { UserService } from '../providers/user/user.service';
 import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 
 @Component({
@@ -16,13 +17,23 @@ export class HomeComponent implements OnInit {
   public app : any;
   public submitBtn : any;
 
+  public trackAppKey: any = '';
+  public trackData: any;
+
   constructor(
     public _testService: TestService,
-    private _toastyService:ToastyService,
+    private _toastyService: ToastyService,
+    private _userService: UserService,
     private _toastyConfig: ToastyConfig,
   ) {
     this._toastyConfig.theme = 'bootstrap';
     this.reset();
+  }
+
+  paymentData() {
+    this._userService.appPaymentData(this.trackAppKey)
+    .then(res => { this.trackData = res; })
+    .catch(err => { console.log(err); })
   }
 
   ngOnInit() {
@@ -31,7 +42,6 @@ export class HomeComponent implements OnInit {
   private reset() {
     this.app = {
       payment_type: null,
-      amount: null,
       note: null
     };
     this.submitBtn = {

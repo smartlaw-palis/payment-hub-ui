@@ -13,6 +13,7 @@ import { AppRouter } from './app.router';
 
 import { UtilsService } from './providers/utils.service';
 import { AuthService } from './providers/auth/auth.service';
+import { UserService } from './providers/user/user.service';
 import {ToastyModule} from 'ng2-toasty';
 import { TestService } from './providers/test.service';
 import { OnlyLoggedInUsersGuard } from './guards/only-logged-in-users.guard';
@@ -36,6 +37,7 @@ import { OnlyAdminUsersGuard } from './guards/only-admin-users.guard';
   ],
   providers: [
     UtilsService,
+    UserService,
     AuthService,
     TestService,
     OnlyLoggedInUsersGuard,
